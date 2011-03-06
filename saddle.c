@@ -1,72 +1,80 @@
-/*Filename: saddle.c
+/*Filename: Saddle.c
 Author: Jithu Sunny
+Blog: http://jithusunnyk.blogspot.com/
+Date: 06-03-11
+Description: This program finds out the saddle points and their positions in a matrix of any order.*/
 
-This program finds out the saddle points of a 3X3 matrix
-Saddle point in a row is that element if any, that is the smallest in it's row and largest in its column*/
+/*Change these macros to change the order of the matrix*/
+#define ROWS 3
+#define COLUMNS 3
 
 #include <stdio.h>
 
-/*Returns true if a is greater than b & c. False otherwise*/
-int larger(int a, int b, int c)
+struct saddle
 {
-	if((a >= b) && (a >= c))
+	int num;
+	int row, column;
+};
+
+/*Returns 1 if element at p is the smallest in its row. Returns 0 otherwise*/
+int is_min_in_row(int* p, int col)
+{
+	int *i;
+	int *first_in_row = p - col;
+
+	for(i = first_in_row; i <= first_in_row + (COLUMNS - 1); i++)
+		if(*p <= *i)
+			continue;
+		else
+			return 0;
+	return 1;
+}
+
+/*Returns 1 if element at p is the largest in its column. Returns 0 otherwise*/
+int is_max_in_col(int* p, int row)
+{
+	int *i;
+	int *first_in_col = p - (COLUMNS * row);
+	
+   	for(i = first_in_col; i <= first_in_col + COLUMNS * (ROWS -1); i += COLUMNS)
+		 if(*p >= *i)
+			continue;	
+		else
+			return 0;
+	return 1;
+}
+
+/*Returns 1 if element at p is a saddle point. Returns 0 otherwise*/			
+int is_saddle(int* p, int row, int col)
+{
+	if((is_min_in_row(p, col)) && (is_max_in_col(p, row)))
 		return 1;
 	return 0;
 }
 
-/*Returns the address of the smallest number in the given row. p is always given the address of the first element in any row*/
-int* smallest(int *p)
-{
-	if(*p <= *(p + 1))
-		if(*p <= *(p + 2))
-			return p;
-		else return p + 2;
-	else 
-		if(*(p + 1) <= *(p + 2))
-			return p + 1;
-		else return p + 2;
-}
-
-/*Returns the element at the address in p if it is the largest in it's column. Otherwise returns 0.*/
-int largest(int *p, int row_no)
-{
-	switch(row_no)
-	{
-		case 0:
-			if(larger(*p, *(p + 3), *(p + 6)))
-				return *p;
-			return 0;
-
-		case 1:
-			if(larger(*p, *(p - 3), *(p + 3)))
-				return *p;
-			return 0;
-	
-		case 2:
-			if(larger(*p, *(p - 3), *(p - 6)))
-				return *p;
-			return 0;
-	}
-}
-	
 int main()
 {
-	int i, j, a[3][3];
-	int saddle[3];
+	int i, j, k = 0;	
+	int a[ROWS][COLUMNS];
 
-	printf("Enter the 3x3 matrix: ");
-	for(i = 0; i < 3; i++)
-	for(j = 0; j < 3; j++)
-		scanf("%d", &a[i][j]);
-	
-	for(i = 0; i < 3; i++)
-		saddle[i] = largest(smallest(&a[i][0]), i);
-	
-	for(i = 0; i < 3; i++)
-		if(saddle[i] == 0)
-			printf("No saddle point in row %d.\n", i + 1);
-		else
-			printf("Saddle point in row %d is %d\n", i + 1, saddle[i]);
+	struct saddle saddles[1000];
 
+	printf("Enter the %dx%d matrix:", ROWS, COLUMNS);	
+	for(i = 0; i < ROWS; i++)
+		for(j = 0; j < COLUMNS; j++)
+			scanf("%d", &a[i][j]);
+
+	for(i = 0; i < ROWS; i++)
+	for(j = 0; j < COLUMNS; j++)
+		if(is_saddle(&a[i][j], i, j))
+		{
+			saddles[k].num = a[i][j];
+			saddles[k].row = i;
+			saddles[k].column = j;
+			++k;
+		}
+
+	for(i = 0; i < k; i++)  
+			printf("Saddle point: %d at position %d,%d\n", saddles[i].num, saddles[i].row, saddles[i].column);
 	return 1;
 }
