@@ -9,7 +9,7 @@ Saddle point in a row is that element if any, that is the smallest in it's row a
 /*Returns true if a is greater than b & c. False otherwise*/
 int larger(int a, int b, int c)
 {
-	if((a > b) && (a > c))
+	if((a >= b) && (a >= c))
 		return 1;
 	return 0;
 }
@@ -17,12 +17,12 @@ int larger(int a, int b, int c)
 /*Returns the address of the smallest number in the given row. p is always given the address of the first element in any row*/
 int* smallest(int *p)
 {
-	if(*p < *(p + 1))
-		if(*p < *(p + 2))
+	if(*p <= *(p + 1))
+		if(*p <= *(p + 2))
 			return p;
 		else return p + 2;
 	else 
-		if(*(p + 1) < *(p + 2))
+		if(*(p + 1) <= *(p + 2))
 			return p + 1;
 		else return p + 2;
 }
