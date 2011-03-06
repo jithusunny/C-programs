@@ -4,7 +4,7 @@ Blog: http://jithusunnyk.blogspot.com/
 Date: 06-03-11
 Description: This program finds out the saddle points and their positions in a matrix of any order.*/
 
-/*Change these macros to change the order of the matrix*/
+/*Change these macros to change the order*/
 #define ROWS 3
 #define COLUMNS 3
 
