@@ -21,8 +21,9 @@ int is_min_in_row(int* p, int col)
 {
 	int *i;
 	int *first_in_row = p - col;
+    int *last_in_row = first_in_row + COLUMNS - 1;
 
-	for(i = first_in_row; i <= first_in_row + (COLUMNS - 1); i++)
+	for(i = first_in_row; i <= last_in_row; i++)
 		if(*p <= *i)
 			continue;
 		else
@@ -35,8 +36,9 @@ int is_max_in_col(int* p, int row)
 {
 	int *i;
 	int *first_in_col = p - (COLUMNS * row);
-	
-   	for(i = first_in_col; i <= first_in_col + COLUMNS * (ROWS -1); i += COLUMNS)
+	int *last_in_col = first_in_col + COLUMNS * (ROWS - 1);
+
+   	for(i = first_in_col; i <= last_in_col; i += COLUMNS)
 		 if(*p >= *i)
 			continue;	
 		else
