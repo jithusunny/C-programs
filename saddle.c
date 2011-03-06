@@ -63,10 +63,9 @@ int main()
 		saddle[i] = largest(smallest(&a[i][0]), i);
 	
 	for(i = 0; i < 3; i++)
-		if(saddle[i] == 0)
-			printf("No saddle point in row %d.\n", i + 1);
-		else
+		if(saddle[i])
 			printf("Saddle point in row %d is %d\n", i + 1, saddle[i]);
-
+		else
+                        printf("No saddle point in row %d.\n", i + 1);
 	return 1;
 }
