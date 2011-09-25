@@ -1,5 +1,4 @@
 /*Filename: pascal.c
-Author: Jithu Sunny
 Blog: http://jithusunnyk.blogspot.com/
 Date: 24-09-11
 Description: /*Finds out the number at any given location(row, position) of Pascal's triangle.
