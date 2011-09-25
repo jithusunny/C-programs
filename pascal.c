@@ -2,7 +2,7 @@
 Author: Jithu Sunny
 Blog: http://jithusunnyk.blogspot.com/
 Date: 24-09-11
-Description: /*Finds out the number at any given location(row, position) of Pascal triangle.
+Description: /*Finds out the number at any given location(row, position) of Pascal's triangle.
                Numbering starts from 1. ie, number of first row is 1. (not 0)*/
 
 #include <stdio.h>
