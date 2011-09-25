@@ -3,12 +3,12 @@ Author: Jithu Sunny
 Blog: http://jithusunnyk.blogspot.com/
 Date: 24-09-11
 Description: /*Finds out the number at any given location(row, position) of Pascal's triangle.
-               Numbering starts from 1. ie, number of first row is 1. (not 0)*/
+               Row-one is conventionally enumerated as 0 & position-one as 0, position-two as 1, etc*/
 
 #include <stdio.h>
 
 int element_at(int row,int pos) {
-	if (pos == 1 || pos == row)
+	if (pos == 0 || pos == row)
 		return 1;
 
 	return element_at(row - 1, pos - 1) + element_at(row - 1, pos);
