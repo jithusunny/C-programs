@@ -228,9 +228,8 @@ void wordify(int number) {
 int main() {
 
 	int number;
- 	char *str;
 	
-	printf("Enter: ");
+	printf("Enter the number: ");
 	scanf("%d", &number);
 
 	wordify(number);
